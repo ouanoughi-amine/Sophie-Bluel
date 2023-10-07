@@ -138,18 +138,33 @@ li:hover {
  text-align: center;
  margin-bottom: 1em;
 }
-.buttonfilter button{
- display: inline;
- justify-content: center;
- align-items: center;
- background-color: #1D6154;
- color: white;
- margin : 2em auto ;
- 
- border-radius: 60px ;
-}
- 
+.filters{
+	display: flex;
 
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+.filters button{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color:white;
+	margin: 2rem 0.7rem;
+	padding: 0 1rem;
+	text-align: center;
+	border-radius: 60px;
+	height: 37px;
+  font-size: 1.2em;
+  border: 1px solid #1D6154;
+  transition: background-color 0.3s;
+}
+.filters button:hover{
+	background-color: #1D6154;
+
+	color: white;
+	cursor: pointer;
+}
 .gallery {
  width: 100%;
  display: grid;

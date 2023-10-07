@@ -1,20 +1,4 @@
-console.log("hello");
 
-	// const works = fetch('http://localhost:5678/api/works')
-    //     .then(response => {
-    //         // Vérifie si la requête a été exécutée avec succès
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log("List of works : ",data);  // Affiche les données dans la console
-    //         // Ici, vous pouvez traiter les données comme vous le souhaitez, par exemple les afficher dans votre interface utilisateur.
-    //     })
-    //     .catch(error => {
-    //         console.error('There was a problem with the fetch operation:', error.message);
-    //     });
 
 	// Fonction pour récupérer les données depuis l'API
 function fetchWorks() {
@@ -33,8 +17,8 @@ function buildGalleryItem(work) {
 	
 
     const img = document.createElement('img');
-    img.src = work.imageUrl;  // Supposons que 'imagePath' est le champ qui contient le chemin de l'image dans vos données
-    img.alt = work.title;       // Supposons que 'name' est le champ qui contient le nom de l'élément
+    img.src = work.imageUrl;  
+    img.alt = work.title;       
 
 	figure.setAttribute('data-category', `${work.category.name}`);
     figure.appendChild(img);
@@ -142,9 +126,7 @@ function myFunction()
 	
 
 
-	// galleryDiv.children.forEach(figure => {
-	// 	console.log(figure);
-	// });
+
 }
 
 // Exécutez la fonction principale
