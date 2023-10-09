@@ -145,7 +145,8 @@ li:hover {
 	align-items: center;
 	gap: 10px;
 }
-.filters button{
+.filter-button{
+
 	font-family: 'Syne';
 	font-weight: 700;
 	color: #1D6154;
@@ -159,11 +160,15 @@ li:hover {
   border: 1px solid #1D6154;
   transition: background-color 0.3s;
 }
-.filters button:hover{
+.filter-button:hover{
 	background-color: #1D6154;
 
 	color: white;
 	cursor: pointer;
+}
+.filter-button:active{
+	background-color: #1D6154;
+	color: white;
 }
 .gallery {
  width: 100%;
