@@ -88,10 +88,10 @@ function fetchWorks() {
 	const filtreId = event.target.id;
 	let allButton = document.querySelectorAll(".filter-button")
 	allButton.forEach((element) => {
-		element.classList.remove("active")
+		element.classList.remove("filter-button-active")
 	});
 
-	filterClicked.classList.add("active");
+	filterClicked.classList.add("filter-button-active");
 	
 	const galleryDiv = document.querySelector(".gallery");
 	// console.log(galleryDiv.children);
@@ -124,9 +124,9 @@ function fetchWorks() {
   }
   
   // Exécutez la fonction principale
-  fetchCategories()
+    fetchCategories()
 	.then((resultat) => {
-	  displayCategoriesButtons(resultat);
+	displayCategoriesButtons(resultat);
 	})
 	.catch((err) => {
 	  console.log("error while fetching the categories : ", err);
