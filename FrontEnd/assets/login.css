@@ -105,6 +105,9 @@ header {
    li:hover {
     color: #B1663C;
    }
+   #log-in{
+    font-weight: bold;
+   }
    .formulaire{
     display: flex;
     flex-direction: column;

@@ -114,6 +114,7 @@ li:hover {
 a{
 	text-decoration: none;
 	color: black;
+	
 }
 #introduction {
  display: flex;
