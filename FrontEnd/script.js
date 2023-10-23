@@ -1,3 +1,24 @@
+window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le DOM est entièrement chargé
+    const loginLink = document.getElementById('login');
+    const logoutLink = document.getElementById('logout');
+
+    if(localStorage.getItem('userToken')) {
+        // Si l'utilisateur est connecté
+        loginLink.style.display = 'none';  // Masquer le lien de connexion
+        logoutLink.style.display = 'block'; // Afficher le lien de déconnexion
+    } else {
+        // Si l'utilisateur n'est pas connecté
+        loginLink.style.display = 'block';  // Afficher le lien de connexion
+        logoutLink.style.display = 'none';  // Masquer le lien de déconnexion
+    }
+});
+
+const logoutLink = document.getElementById('logout');
+logoutLink.addEventListener('click', (event)=>{
+	localStorage.removeItem('userToken');
+});
+
+
 // Fonction pour récupérer les données depuis l'API
 function fetchWorks() {
 	return fetch("http://localhost:5678/api/works").then((response) => {
