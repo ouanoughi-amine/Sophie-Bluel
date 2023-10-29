@@ -55,11 +55,15 @@ table {
  border-spacing: 0;
 }
 body {
-    max-width: 1140px;
-  margin: auto;
+  
+  background-color:#FFFEF8;
     font-family: 'Work Sans' ;
     font-size: 14px;
-    
+   }
+   .main-content{
+    max-width: 1140px;
+    margin: auto;
+   
    }
 header {
     display: flex;
@@ -89,7 +93,7 @@ header {
     font-size: 30px;
     color: #1D6154;
     text-align: center;
-    margin-top:7rem ;
+    margin-top:3rem ;
    }
    nav ul {
     display: flex;
@@ -144,17 +148,22 @@ header {
     border: none;
     display: block;
     font-weight: 700;
-   }
-   .butt:hover{
     cursor: pointer;
    }
+   
   .mot p{
     text-align: center;
    text-decoration-line:underline;
    font-family: 'work sans';
+   margin-bottom: 79px;
    }
-   footer nav ul {
+   .footers{
+    display: block;
+    background-color: white;
+    padding:25px ;
+   }
+   .footers p{
     display: flex;
     justify-content: flex-end;
-    margin: 2em
+    padding-right: 150px;
    }

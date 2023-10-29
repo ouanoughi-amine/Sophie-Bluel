@@ -12,46 +12,48 @@
 
     <link rel="stylesheet" href="./assets/login.css" />
   </head>
-  <body>
-    <main>
-      <header>
-        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-        <nav>
-          <ul>
-            <li>projets</li>
-            <li>contact</li>
-            <li id="log-in">login</li>
-            <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
-          </ul>
-        </nav>
-      </header>
-      <section>
-        <h2>Log In</h2>
-        <form id="loginForm">
-          <ul class="formulaire">
-            <li class="for2" id="email">
-              <legend>E-mail</legend>
-              <input type="email" name="email" />
-            </li>
-            <li class="for2" id="password">
-              <legend>Mot de passe</legend>
-              <input type="password" name="password" />
-            </li>
-          </ul>
-          <button class="butt" id="login">Se connecter</button>
-          <div class="mot"><p>Mot de passe oublié</p></div>
-        </form>
-      </section>
-    </main>
+  <html>
+    <body>
+      <div class="main-content">
+        <main>
+          <header>
+            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+            <nav>
+              <ul>
+                <li>projets</li>
+                <li>contact</li>
+                <li id="log-in">login</li>
+                <li>
+                  <img src="./assets/icons/instagram.png" alt="Instagram" />
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <section>
+            <h2>Log In</h2>
+            <form id="loginForm">
+              <ul class="formulaire">
+                <li class="for2" id="email">
+                  <legend>E-mail</legend>
+                  <input type="email" name="email" />
+                </li>
+                <li class="for2" id="password">
+                  <legend>Mot de passe</legend>
+                  <input type="password" name="password" />
+                </li>
+              </ul>
+              <button class="butt" id="login">Se connecter</button>
+              <div class="mot"><p>Mot de passe oublié</p></div>
+            </form>
+          </section>
+        </main>
+      </div>
 
-    <footer>
-      <nav>
-        <ul>
-          <li>Mentions Légales</li>
-        </ul>
-      </nav>
-    </footer>
+      <footer>
+        <div class="footers"><p>Mentions Légales</p></div>
+      </footer>
 
-    <script src="login.js"></script>
-  </body>
+      <script src="login.js"></script>
+    </body>
+  </html>
 </html>

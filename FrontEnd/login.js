@@ -1,16 +1,12 @@
-document.getElementById("loginForm");
+
+
 document.addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  
-  
   const formData = new FormData(event.target);
 
   const email = formData.get("email");
   const password = formData.get("password");
-
-  console.log("email : ", email);
-  console.log("password : ", password);
 
   try {
     const response = await fetch('http://localhost:5678/api/users/login', {
