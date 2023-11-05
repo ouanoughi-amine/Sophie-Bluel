@@ -80,16 +80,57 @@
           </div>
           <div class="modal-container">
             <div class="overlay modal-trigger"></div>
-            <div class="modal">
+            <div class="modal-add">
+              <button class="btn-arrow">
+                <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+              </button>
+              <button class="close-modal modal-trigger">
+                <i class="fa-solid fa-xmark" style="color: #000000"></i>
+              </button>
+              <h3>Ajout photo</h3>
+              <form>
+                <div class="div-modal">
+                  <i
+                    class="fa-regular fa-image fa-2xl"
+                    style="color: #b9c5cc"
+                  ></i>
+                  <button id="btn-label">
+                    <label for="image-postform" class="label-in-button">
+                      + Ajouter Photo
+                    </label>
+                    <input
+                      type="file"
+                      value="Ajouter photo"
+                      name="image-postform"
+                      id="image-postform"
+                      class="display-none"
+                      required
+                    />
+                  </button>
+
+                  <p>jpg.png : 4mo max</p>
+                </div>
+                <div class="input-div">
+                  <label>Titre</label><br />
+                  <input type="text" />
+                  <label>Catégorie</label><br />
+                  <select class="select-class"></select>
+                  <hr class="line-modal" />
+                  <button class="btn-ajout">Valider</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-delete">
               <button class="close-modal modal-trigger">
                 <i class="fa-solid fa-xmark" style="color: #000000"></i>
               </button>
               <h3>Galerie photo</h3>
               <div class="projets"></div>
+              <hr class="line-modal" />
               <button class="btn-add">Ajouter une photo</button>
             </div>
           </div>
-
           <div class="filters"></div>
           <div class="gallery"></div>
         </section>

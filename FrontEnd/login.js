@@ -2,7 +2,7 @@
 
 document.addEventListener("submit", async function(event) {
   event.preventDefault();
-
+  
   const formData = new FormData(event.target);
 
   const email = formData.get("email");
@@ -23,16 +23,21 @@ document.addEventListener("submit", async function(event) {
     if (!response.ok) {
       const data = await response.json();
       //console.error("Erreur:", data.message);
-      alert(`Erreur: ${data.message}`);
+      const errorMessage = document.querySelector(".message-erreur");
+      console.log(errorMessage);
+      errorMessage.textContent = "Erreur d'utilisateur ou de mot de passe, veuillez réessayer";
+  
     } else {
       const data = await response.json();
       console.log("Utilisateur connecté ! Token:");
       localStorage.setItem('userToken', data.token);
       window.location.href = 'index.html';
+    
       // Stockez le token où vous le souhaitez (par exemple, dans localStorage)
     }
-  } catch (error) {
+  }
+   catch (error) {
     alert(`Erreur lors de l'appel API: ${error}`);
-    //console.error("Erreur lors de l'appel API:", error);
+    
   }
 });

@@ -1,9 +1,11 @@
 
+
 window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le DOM est entièrement chargé
-    const loginLink   = document.getElementById('login');
-    const logoutLink  = document.getElementById('logout');
+    const loginLink   = document.querySelector('#login');
+    const logoutLink  = document.querySelector('#logout');
 	const navBar      = document.querySelector('#nav-bar');
-	const filterProjet= document.querySelector('.filters')
+	const filterProjet= document.querySelector('.filters');
+	const btnModifier = document.querySelector('.modal-btn');
 
     if(localStorage.getItem('userToken')) {
         // Si l'utilisateur est connecté
@@ -15,11 +17,12 @@ window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le 
         // Si l'utilisateur n'est pas connecté
         loginLink.style.display = 'block';  // Afficher le lien de connexion
         logoutLink.style.display = 'none';  // Masquer le lien de déconnexion
-        navBar.style.display = 'none';       
+        navBar.style.display = 'none';  
+		btnModifier.style.display = 'none';      
 	}
 });
 
-const logoutLink = document.getElementById('logout');
+const logoutLink = document.querySelector('#logout');
 logoutLink.addEventListener('click', (event)=>{
 	localStorage.removeItem('userToken');
 });
@@ -147,15 +150,33 @@ function getWorks() {
   
 const modalContainer = document.querySelector(".modal-container");
 const modalTiggers   = document.querySelectorAll(".modal-trigger");
+const btnAdd = document.querySelector(".btn-add");
+const modalAdd = document.querySelector(".modal-add");
+const modalDelete = document.querySelector(".modal-delete");
+
+btnAdd.addEventListener("click", () => {
+	
+	modalDelete.style.display = 'none';
+  modalAdd.style.display = 'block';
   
+});
+
+const btnArrow = document.querySelector(".btn-arrow");
+
+btnArrow.addEventListener("click", ( ) =>{
+	modalDelete.style.display = 'block';
+	modalAdd.style.display = 'none';
+});
 modalTiggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
 function toggleModal(){
+	modalAdd.style.display = 'none';
+	modalDelete.style.display = 'block';
 	modalContainer.classList.toggle("active")
 }
 // récupérer les projets 
 
-function getWorkImg(work) {
+function getWorkImg() {
     fetch(`http://localhost:5678/api/works`, {
     
     })
@@ -166,34 +187,85 @@ function getWorkImg(work) {
 		data.forEach(item => {
 			// Créer un élément div pour chaque travail
 			let projetMod = document.querySelector(".projets");
+			
 			let travailElement = document.createElement("div");
+			travailElement.classList.add("delete");
 			let imageElement = document.createElement("img");
-		
-			// 
 			imageElement.src = item.imageUrl; 
-		
+			
 			travailElement.appendChild(imageElement);
-		
 			let iconeElement = document.createElement("i");
 			iconeElement.classList.add("fa-solid", "fa-trash-can");
-			// iconeElement.style.position = "absolute"; // Définir la position de l'icône
-			// iconeElement.style.top = "15%"; 
-			// iconeElement.style.right = "1%"; 
-			// iconeElement.style.transform = "translate(-20%, -50%)"; 
+			iconeElement.setAttribute("id", item.id);
+		
+		
 			travailElement.appendChild(iconeElement);
 			// / la position relative du conteneur
 			travailElement.style.position = "relative";
 		
 			projetMod.appendChild(travailElement);
-		});
-		 
-        
+	
+		})	});
+		}
+		
+			getWorkImg() 
+			
+			
+				
+// 					
+function deletework(itemId){
+				
+				
+				
+				fetch(`http://localhost:5678/api/works/${itemId}`,{
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+      'Content-Type': 'application/json'
+	}
+  })
+
+    .then((response) => {
+		console.log(response);
+      // Vérifier le code d'état de la réponse
+      const statusCode = response.status;
+      if (statusCode === 204) {
+		alert("étes vous sur de suprimer ce projet ")
+		return;
+      } else {
+        // Une erreur s'est produite lors de la suppression du projet
+        // alert('Something went wrong: ', response.error);
+      }
     })
+			
+		
+		
+    
     .catch(error => {
         console.error('Erreur :', error);
     });
 }
-getWorkImg()
+
+
+
+iconeElement = document.querySelector(".projets");
+				console.log(iconeElement)
+				iconeElement.addEventListener('click', (event) => {
+					console.log(event.target);
+					event.preventDefault();
+			
+				const itemId = event.target.id;
+				deletework(itemId)
+
+				})
+ 
+
+
+
+  
+ 
+
+
 
 
 
