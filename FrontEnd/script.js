@@ -197,6 +197,7 @@ function getWorkImg() {
 			let iconeElement = document.createElement("i");
 			iconeElement.classList.add("fa-solid", "fa-trash-can");
 			iconeElement.setAttribute("id", item.id);
+			travailElement.setAttribute("id", item.id);
 		
 		
 			travailElement.appendChild(iconeElement);
@@ -234,7 +235,7 @@ function deletework(itemId){
 		return;
       } else {
         // Une erreur s'est produite lors de la suppression du projet
-        // alert('Something went wrong: ', response.error);
+        alert('Something went wrong: ', response.error);
       }
     })
 			
@@ -247,10 +248,9 @@ function deletework(itemId){
 }
 
 
-
-iconeElement = document.querySelector(".projets");
-				console.log(iconeElement)
-				iconeElement.addEventListener('click', (event) => {
+projetMod= document.querySelector(".projets");
+				console.log(projetMod)
+				projetMod.addEventListener('click', (event) => {
 					console.log(event.target);
 					event.preventDefault();
 			
