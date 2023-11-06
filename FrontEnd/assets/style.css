@@ -460,12 +460,16 @@ input[type="file"]{
 .display-none {
 	display: none;
   }
- 
   #btn-label{
 	margin-top: 20px;
 	background: #CBD6DC;
     border-radius: 50px;
     padding: 10px 35px;
     border: none;
-    color: #306685;
+  }
+  .label-in-button{
+	cursor: pointer;
+	color: #306685;
+	font-family: 'Work Sans'; 
+	font-size: 14px;
   }
