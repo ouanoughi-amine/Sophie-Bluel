@@ -49,6 +49,7 @@ function getWorks() {
   
 	figure.setAttribute("category", `${work.category.id}`);
 	figure.setAttribute("data-id", `${work.id}`);
+	figure.setAttribute("id", `${work.id}`);
 	figure.appendChild(img);
   
 	const figcaption = document.createElement("figcaption");
@@ -107,9 +108,13 @@ function getWorks() {
 	  const newButton = document.createElement("button");
 	  newButton.innerHTML = categories[i].name;
 	  newButton.id = categories[i].id;
+
+	//   newButton.setAttribute("categoryId");
+	console.log(newButton);
+	 
 	  newButton.classList=("filter-button");
 	  newButton.addEventListener("click", getFilter);
-	  
+	  console.log(newButton);
 	  filterDiv.appendChild(newButton);
 	}
   }
@@ -128,9 +133,9 @@ function getWorks() {
 	const figures = galleryDiv.querySelectorAll("figure");
   
 	figures.forEach((figure) => {
-	  // Vérifiez la valeur de l'attribut 'data-category'
-	  const category = figure.getAttribute("data-id");
-	  
+	  // Vérifiez la valeur de l'attribut 
+	  const category = figure.getAttribute("category");
+
 	  figure.style.display = "none";
 	  if (filtreId === "") {
 		figure.style.display = "block";
