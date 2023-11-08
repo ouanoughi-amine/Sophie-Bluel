@@ -391,6 +391,7 @@ input[type="file"]{
 	max-width: 70px;
 	width: 100%;
 	margin-bottom: 15px;
+	
 }
 .projets i{
 	color: white;
@@ -400,10 +401,15 @@ input[type="file"]{
     width: 12px;
     height: 13px;
 	cursor: pointer;
-	position : absolute;
-	top : 15%;
-	right: 1%;
-	transform : translate(-20%, -50%);
+	position: relative;
+
+}
+.trash-button-modal{
+	position: absolute;
+	transform: translate(40px, 5px);
+	background-color:transparent;
+	border: none;
+	
 }
 
 .line-modal{

@@ -30,7 +30,7 @@ document.addEventListener("submit", async function(event) {
     } else {
       const data = await response.json();
       console.log("Utilisateur connecté ! Token:");
-      localStorage.setItem('userToken', data.token);
+      sessionStorage.setItem('userToken', data.token);
       window.location.href = 'index.html';
     
       // Stockez le token où vous le souhaitez (par exemple, dans localStorage)

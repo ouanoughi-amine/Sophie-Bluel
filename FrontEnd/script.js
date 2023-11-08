@@ -7,12 +7,13 @@ window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le 
 	const filterProjet= document.querySelector('.filters');
 	const btnModifier = document.querySelector('.modal-btn');
 
-    if(localStorage.getItem('userToken')) {
+    if(sessionStorage.getItem('userToken')) {
         // Si l'utilisateur est connecté
         loginLink.style.display = 'none';  // Masquer le lien de connexion
         logoutLink.style.display = 'block'; // Afficher le lien de déconnexion
         navBar.style.display = 'flex';
 		filterProjet.style.display='none';
+		
 	} else {
         // Si l'utilisateur n'est pas connecté
         loginLink.style.display = 'block';  // Afficher le lien de connexion
@@ -24,7 +25,7 @@ window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le 
 
 const logoutLink = document.querySelector('#logout');
 logoutLink.addEventListener('click', (event)=>{
-	localStorage.removeItem('userToken');
+	sessionStorage.removeItem('userToken');
 });
 
 
@@ -46,7 +47,8 @@ function getWorks() {
 	img.src = work.imageUrl;
 	img.alt = work.title;
   
-	figure.setAttribute("data-category", `${work.category.id}`);
+	figure.setAttribute("category", `${work.category.id}`);
+	figure.setAttribute("data-id", `${work.id}`);
 	figure.appendChild(img);
   
 	const figcaption = document.createElement("figcaption");
@@ -107,6 +109,7 @@ function getWorks() {
 	  newButton.id = categories[i].id;
 	  newButton.classList=("filter-button");
 	  newButton.addEventListener("click", getFilter);
+	  
 	  filterDiv.appendChild(newButton);
 	}
   }
@@ -126,7 +129,8 @@ function getWorks() {
   
 	figures.forEach((figure) => {
 	  // Vérifiez la valeur de l'attribut 'data-category'
-	  const category = figure.getAttribute("data-category");
+	  const category = figure.getAttribute("data-id");
+	  
 	  figure.style.display = "none";
 	  if (filtreId === "") {
 		figure.style.display = "block";
@@ -147,7 +151,7 @@ function getWorks() {
 	  console.log("error while fetching the categories : ", err);
 	});
   main();
-  
+//   *************modal**********
 const modalContainer = document.querySelector(".modal-container");
 const modalTiggers   = document.querySelectorAll(".modal-trigger");
 const btnAdd = document.querySelector(".btn-add");
@@ -175,89 +179,187 @@ function toggleModal(){
 	modalContainer.classList.toggle("active")
 }
 // récupérer les projets 
-
-function getWorkImg() {
+function getWorkImg(works) {
     fetch(`http://localhost:5678/api/works`, {
-    
     })
     .then(response => response.json())
-    .then(data => {
-       
-       
-		data.forEach(item => {
-			// Créer un élément div pour chaque travail
-			let projetMod = document.querySelector(".projets");
-			
-			let travailElement = document.createElement("div");
-			travailElement.classList.add("delete");
-			let imageElement = document.createElement("img");
-			imageElement.src = item.imageUrl; 
-			
-			travailElement.appendChild(imageElement);
-			let iconeElement = document.createElement("i");
-			iconeElement.classList.add("fa-solid", "fa-trash-can");
-			iconeElement.setAttribute("id", item.id);
-			travailElement.setAttribute("id", item.id);
+    .then(works => {
+       works.forEach(work => {
+		const galleryModal = document.querySelector(".projets");
+		// let projetMod = document.querySelector(".projets");
+		const galleryElementModal = document.createElement("figure");
+		// const addPostedModalCard = document.createElement("figure");
+		galleryElementModal.dataset.id = work.id;
+		// addPostedModalCard.setAttribute('index', item.id);
+		// let travailElement = document.createElement("div");
+		// travailElement.classList.add("delete");
+		const imageElementModal = document.createElement("img");
+		imageElementModal.src = work.imageUrl; 
+		imageElementModal.crossOrigin = "";
 		
-		
-			travailElement.appendChild(iconeElement);
-			// / la position relative du conteneur
-			travailElement.style.position = "relative";
-		
-			projetMod.appendChild(travailElement);
-	
-		})	});
-		}
-		
-			getWorkImg() 
-			
-			
-				
-// 					
-function deletework(itemId){
-				
-				
-				
-				fetch(`http://localhost:5678/api/works/${itemId}`,{
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
-      'Content-Type': 'application/json'
-	}
-  })
+		// let iconeElement = document.createElement("i");
+		// iconeElement.classList.add("fa-solid", "fa-trash-can");
+		const buttonTrashModal = document.createElement("button");
+		buttonTrashModal.className = "trash-button-modal";
+		const iconeTrashModal = document.createElement("i");
+		iconeTrashModal.className = "fa-solid fa-trash-can";
 
-    .then((response) => {
-		console.log(response);
-      // Vérifier le code d'état de la réponse
-      const statusCode = response.status;
-      if (statusCode === 204) {
-		alert("étes vous sur de suprimer ce projet ")
-		return;
-      } else {
-        // Une erreur s'est produite lors de la suppression du projet
-        alert('Something went wrong: ', response.error);
-      }
+		buttonTrashModal.addEventListener("click", function(event){
+			event.preventDefault();
+			event.stopPropagation(); 
+			deleteWork(work.id);
+		});
+		buttonTrashModal.appendChild(iconeTrashModal);
+		galleryElementModal.appendChild(buttonTrashModal);
+		galleryElementModal.appendChild(imageElementModal);
+		galleryModal.appendChild(galleryElementModal);
+		// iconeElement.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+		// iconeElement.setAttribute("index", item.id);
+		// travailElement.setAttribute("id", item.id);
+	
+	
+		// addPostedModalCard.appendChild(iconeElement);
+		// addPostedModalCard.appendChild(imageElement);
+		// // / la position relative du conteneur
+		// // travailElement.style.position = "relative";
+	
+		// projetMod.appendChild(addPostedModalCard);
+		});
     })
-			
-		
-		
-    
     .catch(error => {
         console.error('Erreur :', error);
     });
 }
+getWorkImg();
 
+const authentificationToken = sessionStorage.getItem("userToken");
 
-projetMod= document.querySelector(".projets");
-				console.log(projetMod)
-				projetMod.addEventListener('click', (event) => {
-					console.log(event.target);
-					event.preventDefault();
+// Fonction de "Suppresion" de projet de la "Gallery" "Modale".
+async function deleteWork(workId) {
+	
+	// Suppression du projet via l'API en fonction de l'ID du Projet (work.id).
+	const deleteResponse = await fetch(`http://localhost:5678/api/works/figure[data-id="${workId}"]`, {
+		method: "DELETE",
+		headers: {
+			"Authorization": "Bearer " + authentificationToken
+		},
+	});
+
+	// Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
+	if (deleteResponse.ok) {
+		const workToRemove = document.querySelectorAll(`figure[data-id="${workId}"]`);
+
+		for(let i = 0; i < workToRemove.length; i++){
+			workToRemove[i].remove();
+		};
+		// Suppression de l'élément du tableau "works" correspondant à l'ID du projet.
+		// const workIndexToRemove = works.findIndex(work => workId === work.id);
+		// works.splice(workIndexToRemove, 1);
+
+	} else {
+		return alert("Échec de la suppresion du projet");
+	};
+};
+// ******************
+// async function getWorkImg(works) {
+// 	const responseWorks = await fetch("http://localhost:5678/api/works");
+// 	const works = await responseWorks.json();
+    
+// 		for (let i = 0; i < works.length; i++) {
+       
+// // 		    const work = works[i];
+// // 			// Créer un élément div pour chaque travail
+// 			const galleryModal = document.querySelector(".projets");
+// 			// let projetMod = document.querySelector(".projets");
+// 			const galleryElementModal = document.createElement("figure");
+// 			// const addPostedModalCard = document.createElement("figure");
+// 			galleryElementModal.dataset.id = work.id;
+// 			// addPostedModalCard.setAttribute('index', item.id);
+// 			// let travailElement = document.createElement("div");
+// 			// travailElement.classList.add("delete");
+// 			const imageElementModal = document.createElement("img");
+// 			imageElementModal.src = work.imageUrl; 
+// 			// imageElementModale.crossOrigin = "";
 			
-				const itemId = event.target.id;
-				deletework(itemId)
+// 			// let iconeElement = document.createElement("i");
+// 			// iconeElement.classList.add("fa-solid", "fa-trash-can");
+// 			const buttonTrashModal = document.createElement("button");
+// 			buttonTrashModal.className = "trash-button-modal";
+// 			const iconeTrashModal = document.createElement("i");
+// 			iconeTrashModal.className = "fa-solid fa-trash-can";
 
-				})
+// 			buttonTrashModal.addEventListener("click", function(){
+// 				deleteWork(work.id);
+// 			});
+// 			galleryModal.appendChild(galleryElementModal);
+// 			galleryElementModal.appendChild(imageElementModal);
+// 			galleryElementModal.appendChild(buttonTrashModal);
+// 			buttonTrashModal.appendChild(buttonTrashModal);
+// 			// iconeElement.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+// 			// iconeElement.setAttribute("index", item.id);
+// 			// travailElement.setAttribute("id", item.id);
+		
+		
+// 			// addPostedModalCard.appendChild(iconeElement);
+// 			// addPostedModalCard.appendChild(imageElement);
+// 			// // / la position relative du conteneur
+// 			// // travailElement.style.position = "relative";
+		
+// 			// projetMod.appendChild(addPostedModalCard);
+// // }};
+
+		
+		
+		
+// // 		getWorkImg(works); 
+			
+			
+				
+// // // 					
+// // // function deletework(itemId){
+				
+				
+				
+// // // 				fetch(`http://localhost:5678/api/works/${itemId}`,{
+// // //     method: 'DELETE',
+// // //     headers: {
+// // //       'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
+// // //       'Content-Type': 'application/json'
+// // // 	}
+// // //   })
+
+// // //     .then((response) => {
+// // // 		console.log(response);
+// // //       // Vérifier le code d'état de la réponse
+// // //       const statusCode = response.status;
+// // //       if (statusCode === 204) {
+// // // 		alert("étes vous sur de suprimer ce projet ")
+// // // 		return;
+// // //       } else {
+// // //         // Une erreur s'est produite lors de la suppression du projet
+// // //         alert('Something went wrong: ', response.error);
+// // //       }
+// // //     })
+			
+		
+		
+    
+// //     .catch(error => {
+// //         console.error('Erreur :', error);
+// //     });
+// // }
+
+
+// // projetMod= document.querySelector(".projets");
+// // 				console.log(projetMod)
+// // 				projetMod.addEventListener('click', (event) => {
+// // 					console.log(event.target);
+// // 					event.preventDefault();
+			
+// // 				const itemId = event.target.id;
+// // 				deletework(itemId)
+
+// // 				})
  
 
 
