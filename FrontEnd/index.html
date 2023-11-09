@@ -30,7 +30,7 @@
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
         <nav>
           <ul>
-            <li>projets</li>
+            <li><a href="#portfolio">projets</a></li>
             <li><a href="#contact">contact</a></li>
             <li id="login">
               <a href="login.html">login</a>
@@ -89,35 +89,46 @@
               </button>
               <h3>Ajout photo</h3>
               <form class="form-add-projet">
-                <div class="div-add-img">
+                <div class="content-add-image">
                   <i
-                    class="fa-regular fa-image fa-2xl"
-                    style="color: #b9c5cc"
+                    class="fa-regular fa-image fa-2xl icone-add-image style=color:#b9c5cc"
                   ></i>
-                  <button id="btn-label">
-                    <label for="image" class="label-in-button">
-                      + Ajouter Photo
-                    </label>
-                    <input
-                      type="file"
-                      value="Ajouter photo"
-                      name="image"
-                      id="image"
-                      class="display-none"
-                      required
-                    />
-                  </button>
 
-                  <p>jpg.png : 4mo max</p>
+                  <label for="image-add-input" class="image-add-button"
+                    >+ Ajouter photo</label
+                  >
+                  <!-- <button id="btn-label"> -->
+                  <input
+                    type="file"
+                    name="image-add-input"
+                    id="image-add-input"
+                    required
+                    accept=".jpg, .png"
+                  />
+                  <p class="image-add-rank">jpg.png : 4mo max</p>
                 </div>
-                <div class="input-div">
-                  <label>Titre</label><br />
-                  <input type="text" />
-                  <label>Catégorie</label><br />
-                  <select class="select-class"></select>
-                  <hr class="line-modal" />
-                  <button class="btn-ajout">Valider</button>
+
+                <div class="input-add-modal">
+                  <label for="title-add">Titre</label>
+                  <input
+                    type="text"
+                    name="title-add"
+                    id="title-add"
+                    class="title-input-modal-add"
+                    required
+                  />
+                  <label for="title-category">Catégorie</label>
+                  <select
+                    name="title-category"
+                    id="title-category"
+                    class="title-input-modal-add"
+                    required
+                  >
+                    <option value=""></option>
+                  </select>
                 </div>
+                <hr class="line-modal" />
+                <button class="btn-ajout button-add">Valider</button>
               </form>
             </div>
 
@@ -130,7 +141,7 @@
               </div>
               <div class="projets"></div>
               <hr class="line-modal" />
-              <button class="btn-add">Ajouter une photo</button>
+              <button class="btn-add button-add">Ajouter une photo</button>
             </div>
           </div>
           <div class="filters"></div>

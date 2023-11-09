@@ -1,22 +1,9 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,/* http://meyerweb.com/eric/tools/css/reset/
-v2.0 | 20110126
-License: none (public domain)
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -42,46 +29,44 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
- margin: 0;
- padding: 0;
- border: 0;
- font-size: 100%;
- font: inherit;
- vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
- display: block;
+  display: block;
 }
 body {
- line-height: 1;
+  line-height: 1;
 }
 ol, ul {
- list-style: none;
+  list-style: none;
 }
 blockquote, q {
- quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
- content: '';
- content: none;
+  content: '';
+  content: none;
 }
 table {
- border-collapse: collapse;
- border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 body {
-  
+  font-family: 'Work Sans' ;
   background-color:#FFFEF8;
-    font-family: 'Work Sans' ;
-    font-size: 14px;
+  font-size: 14px;
    }
    .main-content{
     max-width: 1140px;
     margin: auto;
-   
    }
 header {
     display: flex;
@@ -103,7 +88,6 @@ header {
     font-family: 'Work Sans';
     font-size:10px;
     letter-spacing: 0.1em;
-   
    }
    h2{
     font-family: 'Syne';
@@ -111,7 +95,6 @@ header {
     font-size: 30px;
     color: #1D6154;
     text-align: center;
-    
    }
    nav ul {
     display: flex;
@@ -134,13 +117,10 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-   
    }
    .login-input{
     font-family: "Work Sans";
     margin-top: 2rem;
-   
    }
     .login-input legend{
         color: #000;
@@ -151,8 +131,14 @@ header {
     border: none;
     width: 379px;
     padding: 0.9rem 0;
-
-  
+   }
+   .message-erreur{
+    text-align:center ;
+    margin-top: 30px;
+    color: red;
+    font-family: 'work sans';
+    font-size: larger;
+    font-weight: 600;
    }
    .butt{
     font-family: 'Syne';
@@ -171,180 +157,15 @@ header {
    
   .mot-de-passe p{
     text-align: center;
-   text-decoration-line:underline;
-   font-family: 'work sans';
-   
-   }
-   .footers{
-    background-color: white;
-    position: fixed;
-    bottom: 5px;
-    width: 93%;
-    padding: 30px 50px;
-   }
-   .footers p{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 150px;
-   }
-   .message-erreur{
-    text-align:center ;
-    margin-top: 30px;
-    color: red;
+    text-decoration-line:underline;
     font-family: 'work sans';
-    font-size: larger;
-    font-weight: 600;
-   
-   
-
    }
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
- margin: 0;
- padding: 0;
- border: 0;
- font-size: 100%;
- font: inherit;
- vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
- display: block;
-}
-body {
- line-height: 1;
-}
-ol, ul {
- list-style: none;
-}
-blockquote, q {
- quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
- content: '';
- content: none;
-}
-table {
- border-collapse: collapse;
- border-spacing: 0;
-}
-body {
+   /* ************** footer************ */
   
-  background-color:#FFFEF8;
-    font-family: 'Work Sans' ;
-    font-size: 14px;
+   .footers {
+    position: fixed;
+    right: 250px;
+    bottom: 30px;
    }
-   .main-content{
-    max-width: 1140px;
-    margin: auto;
-   
-   }
-header {
-    display: flex;
-    justify-content: space-between;
-    margin: 50px 0
-   }
+ 
   
-   
-   h1{
-    display: flex;
-    flex-direction: column;
-    font-family: 'Syne';
-    font-size: 22px;
-    font-weight: 800;
-    color: #B1663C
-   }
-   
-   h1 > span {
-    font-family: 'Work Sans';
-    font-size:10px;
-    letter-spacing: 0.1em;
-   
-   }
-   h2{
-    font-family: 'Syne';
-    font-weight: 700;
-    font-size: 30px;
-    color: #1D6154;
-    text-align: center;
-    margin-top:3rem ;
-   }
-   nav ul {
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-   
-   }
-   nav li {
-    padding: 0 10px;
-    font-size: 1.2em;
-   }
-   
-   li:hover {
-    color: #B1663C;
-   }
-   #log-in{
-    font-weight: bold;
-   }
-   .formulaire{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-   
-   }
-   .for2{
-    font-family: "Work Sans";
-    margin-top: 2rem;
-   
-   }
-    .for2 legend{
-        color: #000;
-    }
-     .for2 input{
-    margin-top: 1rem;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-    border: none;
-    width: 379px;
-    padding: 0.9rem 0;
-
-  
-   }
-   .butt{
-    font-family: 'Syne';
-    color: white;
-    background-color: #1D6154;
-    margin : 3em auto ;
-    width: 180px;
-    height: 36px;
-    text-align: center;
-    border-radius: 60px ;
-    border: none;
-    display: block;
-    font-weight: 700;
-    cursor: pointer;
-   }
-   
-  .mot p{
-    text-align: center;
-   text-decoration-line:underline;
-   font-family: 'work sans';
-   margin-bottom: 79px;
-   }
-   .footers{
-    display: block;
-    background-color: white;
-    padding:25px ;
-   }
-   .footers p{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 150px;
-   }

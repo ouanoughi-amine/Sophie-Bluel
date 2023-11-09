@@ -1,6 +1,6 @@
 
-
-window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le DOM est entièrement chargé
+//s'assurer que le DOM est entièrement chargé
+window.addEventListener('DOMContentLoaded', (event) => { 
     const loginLink   = document.querySelector('#login');
     const logoutLink  = document.querySelector('#logout');
 	const navBar      = document.querySelector('#nav-bar');
@@ -9,26 +9,23 @@ window.addEventListener('DOMContentLoaded', (event) => { // Assurez-vous que le 
 
     if(sessionStorage.getItem('userToken')) {
         // Si l'utilisateur est connecté
-        loginLink.style.display = 'none';  // Masquer le lien de connexion
-        logoutLink.style.display = 'block'; // Afficher le lien de déconnexion
+        loginLink.style.display = 'none';  
+        logoutLink.style.display = 'block'; 
         navBar.style.display = 'flex';
 		filterProjet.style.display='none';
 		
 	} else {
         // Si l'utilisateur n'est pas connecté
-        loginLink.style.display = 'block';  // Afficher le lien de connexion
-        logoutLink.style.display = 'none';  // Masquer le lien de déconnexion
+        loginLink.style.display = 'block';  
+        logoutLink.style.display = 'none';  
         navBar.style.display = 'none';  
 		btnModifier.style.display = 'none';      
 	}
 });
-
 const logoutLink = document.querySelector('#logout');
 logoutLink.addEventListener('click', (event)=>{
 	sessionStorage.removeItem('userToken');
 });
-
-
 // Fonction pour récupérer les données depuis l'API
 function getWorks() {
 	return fetch("http://localhost:5678/api/works").then((response) => {
@@ -57,7 +54,6 @@ function getWorks() {
 	figure.appendChild(figcaption);
 	return figure;
   }
-  
   // Fonction pour afficher les éléments dans la galerie
   function displayWorks(works) {
 	const galleryDiv = document.querySelector(".gallery");
@@ -66,7 +62,6 @@ function getWorks() {
 	  galleryDiv.appendChild(galleryItem);
 	});
   }
-  
   // Fonction principale pour récupérer et afficher les éléments
   function main() {
 	getWorks()
@@ -75,7 +70,6 @@ function getWorks() {
 		console.error("There was a problem:", error.message);
 	  });
   }
-  
   function getCategories() {
 	return fetch("http://localhost:5678/api/categories").then((response) => {
 	  if (!response.ok) {
@@ -85,7 +79,6 @@ function getWorks() {
 	  return response.json();
 	});
   }
-  
   function displayCategoriesButtons(categories) {
 	const filterDiv = document.querySelector(".filters");
 	// console.log("categories : ",categories);
@@ -96,12 +89,6 @@ function getWorks() {
 	
 	allButton.addEventListener("click", getFilter);
 	filterDiv.appendChild(allButton);
-  
-	// categories.forEach(categorie => {
-	//     const newButton = document.createElement('button');
-	//     newButton.innerHTML = categorie.name;
-	// 	filterDiv.appendChild(newButton);
-	// });
   
 	for (let i = 0; i < categories.length; i++) {
 	  console.log(i);
@@ -146,7 +133,6 @@ function getWorks() {
 	  }
 	});
   }
-  
   // Exécutez la fonction principale
     getCategories()
 	.then((resultat) => {
@@ -164,12 +150,9 @@ const modalAdd = document.querySelector(".modal-add");
 const modalDelete = document.querySelector(".modal-delete");
 
 btnAdd.addEventListener("click", () => {
-	
 	modalDelete.style.display = 'none';
-  modalAdd.style.display = 'block';
-  
+	modalAdd.style.display = 'block';
 });
-
 const btnArrow = document.querySelector(".btn-arrow");
 
 btnArrow.addEventListener("click", ( ) =>{
@@ -193,17 +176,12 @@ function getWorkImg(works) {
 		const galleryModal = document.querySelector(".projets");
 		// let projetMod = document.querySelector(".projets");
 		const galleryElementModal = document.createElement("figure");
-		// const addPostedModalCard = document.createElement("figure");
 		galleryElementModal.dataset.id = work.id;
-		// addPostedModalCard.setAttribute('index', item.id);
-		// let travailElement = document.createElement("div");
-		// travailElement.classList.add("delete");
+		
 		const imageElementModal = document.createElement("img");
 		imageElementModal.src = work.imageUrl; 
 		imageElementModal.crossOrigin = "";
 		
-		// let iconeElement = document.createElement("i");
-		// iconeElement.classList.add("fa-solid", "fa-trash-can");
 		const buttonTrashModal = document.createElement("button");
 		buttonTrashModal.className = "trash-button-modal";
 		const iconeTrashModal = document.createElement("i");
@@ -218,17 +196,7 @@ function getWorkImg(works) {
 		galleryElementModal.appendChild(buttonTrashModal);
 		galleryElementModal.appendChild(imageElementModal);
 		galleryModal.appendChild(galleryElementModal);
-		// iconeElement.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
-		// iconeElement.setAttribute("index", item.id);
-		// travailElement.setAttribute("id", item.id);
-	
-	
-		// addPostedModalCard.appendChild(iconeElement);
-		// addPostedModalCard.appendChild(imageElement);
-		// // / la position relative du conteneur
-		// // travailElement.style.position = "relative";
-	
-		// projetMod.appendChild(addPostedModalCard);
+		
 		});
     })
     .catch(error => {
@@ -237,7 +205,7 @@ function getWorkImg(works) {
 }
 getWorkImg();
 
-const authentificationToken = sessionStorage.getItem("userToken");
+const token = sessionStorage.getItem("userToken");
 
 // Fonction de "Suppresion" de projet de la "Gallery" "Modale".
 async function deleteWork(workId) {
@@ -246,7 +214,7 @@ async function deleteWork(workId) {
 	const deleteResponse = await fetch(`http://localhost:5678/api/works/figure[data-id="${workId}"]`, {
 		method: "DELETE",
 		headers: {
-			"Authorization": "Bearer " + authentificationToken
+			"Authorization": "Bearer " + token
 		},
 	});
 
@@ -257,115 +225,14 @@ async function deleteWork(workId) {
 		for(let i = 0; i < workToRemove.length; i++){
 			workToRemove[i].remove();
 		};
-		// Suppression de l'élément du tableau "works" correspondant à l'ID du projet.
-		// const workIndexToRemove = works.findIndex(work => workId === work.id);
-		// works.splice(workIndexToRemove, 1);
-
+		
 	} else {
 		return alert("Échec de la suppresion du projet");
 	};
 };
-// ******************
-// async function getWorkImg(works) {
-// 	const responseWorks = await fetch("http://localhost:5678/api/works");
-// 	const works = await responseWorks.json();
-    
-// 		for (let i = 0; i < works.length; i++) {
-       
-// // 		    const work = works[i];
-// // 			// Créer un élément div pour chaque travail
-// 			const galleryModal = document.querySelector(".projets");
-// 			// let projetMod = document.querySelector(".projets");
-// 			const galleryElementModal = document.createElement("figure");
-// 			// const addPostedModalCard = document.createElement("figure");
-// 			galleryElementModal.dataset.id = work.id;
-// 			// addPostedModalCard.setAttribute('index', item.id);
-// 			// let travailElement = document.createElement("div");
-// 			// travailElement.classList.add("delete");
-// 			const imageElementModal = document.createElement("img");
-// 			imageElementModal.src = work.imageUrl; 
-// 			// imageElementModale.crossOrigin = "";
-			
-// 			// let iconeElement = document.createElement("i");
-// 			// iconeElement.classList.add("fa-solid", "fa-trash-can");
-// 			const buttonTrashModal = document.createElement("button");
-// 			buttonTrashModal.className = "trash-button-modal";
-// 			const iconeTrashModal = document.createElement("i");
-// 			iconeTrashModal.className = "fa-solid fa-trash-can";
 
-// 			buttonTrashModal.addEventListener("click", function(){
-// 				deleteWork(work.id);
-// 			});
-// 			galleryModal.appendChild(galleryElementModal);
-// 			galleryElementModal.appendChild(imageElementModal);
-// 			galleryElementModal.appendChild(buttonTrashModal);
-// 			buttonTrashModal.appendChild(buttonTrashModal);
-// 			// iconeElement.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
-// 			// iconeElement.setAttribute("index", item.id);
-// 			// travailElement.setAttribute("id", item.id);
-		
-		
-// 			// addPostedModalCard.appendChild(iconeElement);
-// 			// addPostedModalCard.appendChild(imageElement);
-// 			// // / la position relative du conteneur
-// 			// // travailElement.style.position = "relative";
-		
-// 			// projetMod.appendChild(addPostedModalCard);
-// // }};
+//  *********** ajouter des projets à la modale ***************
 
-		
-		
-		
-// // 		getWorkImg(works); 
-			
-			
-				
-// // // 					
-// // // function deletework(itemId){
-				
-				
-				
-// // // 				fetch(`http://localhost:5678/api/works/${itemId}`,{
-// // //     method: 'DELETE',
-// // //     headers: {
-// // //       'Authorization': `Bearer ${localStorage.getItem('userToken')}`,
-// // //       'Content-Type': 'application/json'
-// // // 	}
-// // //   })
-
-// // //     .then((response) => {
-// // // 		console.log(response);
-// // //       // Vérifier le code d'état de la réponse
-// // //       const statusCode = response.status;
-// // //       if (statusCode === 204) {
-// // // 		alert("étes vous sur de suprimer ce projet ")
-// // // 		return;
-// // //       } else {
-// // //         // Une erreur s'est produite lors de la suppression du projet
-// // //         alert('Something went wrong: ', response.error);
-// // //       }
-// // //     })
-			
-		
-		
-    
-// //     .catch(error => {
-// //         console.error('Erreur :', error);
-// //     });
-// // }
-
-
-// // projetMod= document.querySelector(".projets");
-// // 				console.log(projetMod)
-// // 				projetMod.addEventListener('click', (event) => {
-// // 					console.log(event.target);
-// // 					event.preventDefault();
-			
-// // 				const itemId = event.target.id;
-// // 				deletework(itemId)
-
-// // 				})
- 
 
 
 
