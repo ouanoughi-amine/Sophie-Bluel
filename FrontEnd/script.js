@@ -38,12 +38,10 @@ function getWorks() {
   // Fonction pour construire les éléments HTML
   function buildGalleryItem(work) {
 	const figure = document.createElement("figure");
-  
 	const img = document.createElement("img");
 	img.src = work.imageUrl;
 	img.alt = work.title;
   
-	// figure.setAttribute("category", ${work.category.id});
 	figure.setAttribute("category", `${work.category && work.category.id ? work.category.id : work.categoryId}`);
 	figure.setAttribute("data-id", `${work.id}`);
 	figure.setAttribute("id", `${work.id}`);
@@ -94,16 +92,13 @@ function getWorks() {
 	filterDiv.appendChild(allButton);
   
 	for (let i = 0; i < categories.length; i++) {
-	  console.log(i);
 	  const newButton = document.createElement("button");
 	  newButton.innerHTML = categories[i].name;
 	  newButton.id = categories[i].id;
-
-	//   newButton.setAttribute("categoryId");
-	 
 	  newButton.classList=("filter-button");
+
 	  newButton.addEventListener("click", getFilter);
-	  console.log(newButton);
+	  
 	  filterDiv.appendChild(newButton);
 	}
   }
@@ -118,7 +113,6 @@ function getWorks() {
 	filterClicked.classList.add("filter-button-active");
 	
 	const galleryDiv = document.querySelector(".gallery");
-	// console.log(galleryDiv.children);
 	const figures = galleryDiv.querySelectorAll("figure");
   
 	figures.forEach((figure) => {
@@ -143,23 +137,20 @@ function getWorks() {
 	.catch((err) => {
 	  console.log("error while fetching the categories : ", err);
 	});
-	
-	  
   main();
+
 //   ************modal*********
 const modalContainer = document.querySelector(".modal-container");
 const modalTiggers   = document.querySelectorAll(".modal-trigger");
-const btnAdd = document.querySelector(".btn-add");
-const modalAdd = document.querySelector(".modal-add");
-const modalDelete = document.querySelector(".modal-delete");
-const btnArrow = document.querySelector(".btn-arrow");
+const btnAdd         = document.querySelector(".btn-add");
+const modalAdd       = document.querySelector(".modal-add");
+const modalDelete    = document.querySelector(".modal-delete");
+const btnArrow       = document.querySelector(".btn-arrow");
 
 btnAdd.addEventListener("click", () => {
 	modalDelete.style.display = 'none';
 	modalAdd.style.display = 'block';
 });
-
-
 btnArrow.addEventListener("click", () => {
 	modalDelete.style.display = 'block';
 	modalAdd.style.display = 'none';
@@ -178,30 +169,25 @@ function getWorkImg(works) {
     .then(response => response.json())
     .then(works => {
        works.forEach(work => {
-		
-		
 		const galleryModal = document.querySelector(".projets");
-		// let projetMod = document.querySelector(".projets");
 		const galleryElementModal = document.createElement("figure");
+		const imageElementModal   = document.createElement("img");
+		const buttonTrashModal    = document.createElement("button");
+		const iconeTrashModal     = document.createElement("i");
 		galleryElementModal.dataset.id = work.id;
 		
-		const imageElementModal = document.createElement("img");
 		imageElementModal.src = work.imageUrl; 
 		imageElementModal.crossOrigin = "";
 		
-		const buttonTrashModal = document.createElement("button");
 		buttonTrashModal.className = "trash-button-modal";
-		const iconeTrashModal = document.createElement("i");
 		iconeTrashModal.className = "fa-solid fa-trash-can";
 		buttonTrashModal.addEventListener("click", function(){
-			
 			deleteWork(work.id);
 		});
 		buttonTrashModal.appendChild(iconeTrashModal);
 		galleryElementModal.appendChild(buttonTrashModal);
 		galleryElementModal.appendChild(imageElementModal);
 		galleryModal.appendChild(galleryElementModal);
-		
 		});
     })
     .catch(error => {
@@ -214,8 +200,6 @@ const token = sessionStorage.getItem("userToken");
 
 // Fonction de "Suppresion" de projet de la "Gallery" "Modale".
 async function deleteWork(workId) {
-	
-
 	// Suppression du projet via l'API en fonction de l'ID du Projet (work.id).
 	const deleteResponse = await fetch("http://localhost:5678/api/works/" + workId, {
 		method: "DELETE",
@@ -230,9 +214,7 @@ async function deleteWork(workId) {
 
 		for(let i = 0; i < workToRemove.length; i++){
 			workToRemove[i].remove();
-			console.log(workToRemove);
 		};
-		
 	} else {
 		return alert("Échec de la suppresion du projet");
 	};
@@ -242,8 +224,7 @@ async function deleteWork(workId) {
 
 // 
 const buttonValiderModal = document.querySelector("#button-valider-modal");
-
-const inputAddImage =document.querySelector("#input-add-image");
+const inputAddImage      = document.querySelector("#input-add-image");
 
 inputAddImage.addEventListener("change", () => {
 
@@ -258,11 +239,9 @@ inputAddImage.addEventListener("change", () => {
 	imagePreviewModal.className = ("image-preview-modal");
 
 	contentAddImage.appendChild(imagePreviewModal);
-
 	// ajout d'un click pour ajouter une autre photo (en cliquant sur l'image)
 	imagePreviewModal.addEventListener("click", ()=> {
 		inputAddImage.click();
-
 	});
 } else {
 	inputAddImage.value = "";
@@ -281,32 +260,32 @@ async function formCategories() {
 		const titleCategory = document.querySelector("#title-category");
 		// créer les balises "option"
 		const titleCategoryOptions= document.createElement("option");
+
 		titleCategoryOptions.value = categoryModal.id;
 		titleCategoryOptions.innerText = categoryModal.name;
 		// ajout des balises option au "select"
 		titleCategory.appendChild(titleCategoryOptions);
-
 	}
 };
   formCategories();
  
 // validation du formulaire de la modale
-
 const titleAdd          = document.querySelector("#title-add");
 const titleCategory     = document.querySelector("#title-category");
-const galleryModal = document.querySelector(".projets");
-const galleryDiv = document.querySelector(".gallery"); 
+const galleryModal      = document.querySelector(".projets");
+const galleryDiv        = document.querySelector(".gallery"); 
+
 buttonValiderModal.addEventListener("click",  (event) => {
 	// Empêcher le formulaire de se soumettre et de rafraîchir la page.
 	event.preventDefault();
+    // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
 	modalAdd.style.display="none";
+    // afficher la " modalDelete" aprés qu'on a cliquer sur button valider
 	modalDelete.style.display="block";
   
 	// Vérifier si tous les champs du formulaire sont valides.
-	if (inputAddImage.checkValidity() ===true && titleAdd.checkValidity() ===true && titleCategory.checkValidity() === true) {
-		
+	if (inputAddImage.checkValidity() === true && titleAdd.checkValidity() === true && titleCategory.checkValidity() === true) {
 	 postWork();
-	
 	} else {
 	  // Afficher une erreur si tous les champs du formulaire ne sont pas valides.
 	  alert("Tous les champs sont requis");
@@ -321,6 +300,7 @@ async function postWork(works){
 	formData.append("image", inputAddImage.files[0]);
 	formData.append("title", titleAdd.value);
 	formData.append("category", titleCategory.value);
+
 	const token = sessionStorage.getItem("userToken");
 	const addresponse = await fetch("http://localhost:5678/api/works/", {
 		method:"post",
@@ -332,24 +312,11 @@ async function postWork(works){
 });
 //  si la réponse est ok on ajoute le projet à la galerie et la modale
 if(addresponse.ok){
-	// mise à jour de works
-	// works.push(await addresponse.json());
-	// console.log(addresponse);
-	// btnArrow.click();
-
-
-	// const galleryModal = document.querySelector(".projets");
-	// const galleryDiv = document.querySelector(".gallery");
-	// galleryModal.innerHTML="";
-	// 	galleryDiv.innerHTML="";
-
 
 	try {
 		const jsonData = await addresponse.json(); 
-		console.log(jsonData); 
-		// add projet to model
+		//  ajout de projet à la modale
 		const galleryModal = document.querySelector(".projets");
-		// let projetMod = document.querySelector(".projets");
 		const galleryElementModal = document.createElement("figure");
 		galleryElementModal.dataset.id = jsonData.id;
 		
@@ -370,26 +337,16 @@ if(addresponse.ok){
 		galleryElementModal.appendChild(imageElementModal);
 		galleryModal.appendChild(galleryElementModal);
 
-		//add projet to gallery 
-		
+		// ajout de projet à la galerie
 		const galleryDiv = document.querySelector(".gallery");
 	
 	  	const galleryItem = buildGalleryItem(jsonData);
 	 	galleryDiv.appendChild(galleryItem);
-		
+
 	} catch (error) {
 		console.error("Erreur lors de la lecture de l'ajout d'un  work:", error);
 	}
-	// getWorkImg();
-	// main();
-	// getWorks()
-	//   .then(displayWorks)
-	//   .catch((error) => {
-	// 	console.error("There was a problem:", error.message);
-	//   });
-
 } else {
 	return alert("Échec de la l'ajout du projet");
 };
-
 };
