@@ -1,4 +1,3 @@
-
 //s'assurer que le DOM est entièrement chargé
 window.addEventListener('DOMContentLoaded', (event) => { 
     const loginLink   = document.querySelector('#login');
@@ -44,7 +43,8 @@ function getWorks() {
 	img.src = work.imageUrl;
 	img.alt = work.title;
   
-	figure.setAttribute("category", `${work.category.id}`);
+	// figure.setAttribute("category", ${work.category.id});
+	figure.setAttribute("category", `${work.category && work.category.id ? work.category.id : work.categoryId}`);
 	figure.setAttribute("data-id", `${work.id}`);
 	figure.setAttribute("id", `${work.id}`);
 	figure.appendChild(img);
@@ -146,7 +146,7 @@ function getWorks() {
 	
 	  
   main();
-//   *************modal**********
+//   ************modal*********
 const modalContainer = document.querySelector(".modal-container");
 const modalTiggers   = document.querySelectorAll(".modal-trigger");
 const btnAdd = document.querySelector(".btn-add");
@@ -178,7 +178,8 @@ function getWorkImg(works) {
     .then(response => response.json())
     .then(works => {
        works.forEach(work => {
-	
+		
+		
 		const galleryModal = document.querySelector(".projets");
 		// let projetMod = document.querySelector(".projets");
 		const galleryElementModal = document.createElement("figure");
@@ -220,7 +221,7 @@ async function deleteWork(workId) {
 		method: "DELETE",
 		headers: {
 			"Authorization": `Bearer ${token}`
-		},
+				},
 	});
 
 	// Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
@@ -237,7 +238,7 @@ async function deleteWork(workId) {
 	};
 };
 
-//  *********** ajouter des projets à la modale ***************
+//  ********* ajouter des projets à la modale *************
 
 // 
 const buttonValiderModal = document.querySelector("#button-valider-modal");
@@ -299,7 +300,7 @@ buttonValiderModal.addEventListener("click",  (event) => {
 	// Empêcher le formulaire de se soumettre et de rafraîchir la page.
 	event.preventDefault();
 	modalAdd.style.display="none";
-modalDelete.style.display="block";
+	modalDelete.style.display="block";
   
 	// Vérifier si tous les champs du formulaire sont valides.
 	if (inputAddImage.checkValidity() ===true && titleAdd.checkValidity() ===true && titleCategory.checkValidity() === true) {
@@ -335,21 +336,60 @@ if(addresponse.ok){
 	// works.push(await addresponse.json());
 	// console.log(addresponse);
 	// btnArrow.click();
-	const galleryModal = document.querySelector(".projets");
-	const galleryDiv = document.querySelector(".gallery");
-	galleryModal.innerHTML="";
-		galleryDiv.innerHTML="";
-		
-	getWorkImg();
-	main();
 
+
+	// const galleryModal = document.querySelector(".projets");
+	// const galleryDiv = document.querySelector(".gallery");
+	// galleryModal.innerHTML="";
+	// 	galleryDiv.innerHTML="";
+
+
+	try {
+		const jsonData = await addresponse.json(); 
+		console.log(jsonData); 
+		// add projet to model
+		const galleryModal = document.querySelector(".projets");
+		// let projetMod = document.querySelector(".projets");
+		const galleryElementModal = document.createElement("figure");
+		galleryElementModal.dataset.id = jsonData.id;
+		
+		const imageElementModal = document.createElement("img");
+		imageElementModal.src = jsonData.imageUrl; 
+		imageElementModal.crossOrigin = "";
+		
+		const buttonTrashModal = document.createElement("button");
+		buttonTrashModal.className = "trash-button-modal";
+		const iconeTrashModal = document.createElement("i");
+		iconeTrashModal.className = "fa-solid fa-trash-can";
+		buttonTrashModal.addEventListener("click", function(){
+			
+			deleteWork(jsonData.id);
+		});
+		buttonTrashModal.appendChild(iconeTrashModal);
+		galleryElementModal.appendChild(buttonTrashModal);
+		galleryElementModal.appendChild(imageElementModal);
+		galleryModal.appendChild(galleryElementModal);
+
+		//add projet to gallery 
+		
+		const galleryDiv = document.querySelector(".gallery");
 	
+	  	const galleryItem = buildGalleryItem(jsonData);
+	 	galleryDiv.appendChild(galleryItem);
+		
+	} catch (error) {
+		console.error("Erreur lors de la lecture de l'ajout d'un  work:", error);
+	}
+	// getWorkImg();
+	// main();
+	// getWorks()
+	//   .then(displayWorks)
+	//   .catch((error) => {
+	// 	console.error("There was a problem:", error.message);
+	//   });
 
 } else {
 	return alert("Échec de la l'ajout du projet");
 };
 
 };
-
-
-
