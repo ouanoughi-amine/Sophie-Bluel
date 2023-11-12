@@ -2,7 +2,6 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,13 +10,13 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-
+    <script
+      src="https://kit.fontawesome.com/16c256a34b.js"
+      crossorigin="anonymous"
+    ></script>
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div id="nav-bar">
@@ -88,24 +87,24 @@
                 <i class="fa-solid fa-xmark" style="color: #000000"></i>
               </button>
               <h3>Ajout photo</h3>
-              <form class="form-add-projet">
+              <form>
                 <div class="content-add-image">
                   <i
                     class="fa-regular fa-image fa-2xl icone-add-image style=color:#b9c5cc"
                   ></i>
 
-                  <label for="image-add-input" class="image-add-button"
+                  <label for="input-add-image" class="button-add-image"
                     >+ Ajouter photo</label
                   >
                   <!-- <button id="btn-label"> -->
                   <input
                     type="file"
-                    name="image-add-input"
-                    id="image-add-input"
+                    name="input-add-image"
+                    id="input-add-image"
                     required
                     accept=".jpg, .png"
                   />
-                  <p class="image-add-rank">jpg.png : 4mo max</p>
+                  <p class="rank-add-image">jpg.png : 4mo max</p>
                 </div>
 
                 <div class="input-add-modal">
@@ -128,7 +127,9 @@
                   </select>
                 </div>
                 <hr class="line-modal" />
-                <button class="btn-ajout button-add">Valider</button>
+                <button class="btn-ajout button-add" id="button-valider-modal">
+                  Valider
+                </button>
               </form>
             </div>
 
@@ -174,6 +175,5 @@
         </nav>
       </footer>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>

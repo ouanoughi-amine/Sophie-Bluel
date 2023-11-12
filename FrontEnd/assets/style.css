@@ -248,7 +248,7 @@ input[type="submit"]{
 }
 .modal-btn{
 	border: none;
-	background-color: white;
+	background-color: #FFFEF8;
 	cursor: pointer;
 	
 }
@@ -407,7 +407,7 @@ input[type="submit"]{
 	color: #B9C5CC;
 	margin-top: 30px;
 }
-.image-add-button{
+.button-add-image{
 	color: #306685;
 	background-color: #CBD6DC;
 	margin-top: 50px;
@@ -416,10 +416,16 @@ input[type="submit"]{
 	border-radius: 3rem;
 	cursor: pointer;
 }
-#image-add-input{
+#input-add-image{
 	display: none;
 }
-.image-add-rank{
+.image-preview-modal{
+	max-width: 364px;
+	width: 70%;
+	height: 169px;
+	
+}
+.rank-add-image{
 	margin-top: 15px;
 }
 .input-add-modal {
