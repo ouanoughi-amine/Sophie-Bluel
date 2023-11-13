@@ -77,8 +77,10 @@
               >modifier
             </button>
           </div>
+          <!-- conteneur de la modale -->
           <div class="modal-container">
             <div class="overlay modal-trigger"></div>
+            <!-- modale pour ajouter des projets -->
             <div class="modal-add">
               <button class="btn-arrow">
                 <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
@@ -96,7 +98,7 @@
                   <label for="input-add-image" class="button-add-image"
                     >+ Ajouter photo</label
                   >
-                  <!-- <button id="btn-label"> -->
+
                   <input
                     type="file"
                     name="input-add-image"
@@ -125,6 +127,7 @@
                   >
                     <option value=""></option>
                   </select>
+                  <p class="error-message-add"></p>
                 </div>
                 <hr class="line-modal" />
                 <button class="btn-ajout button-add" id="button-valider-modal">

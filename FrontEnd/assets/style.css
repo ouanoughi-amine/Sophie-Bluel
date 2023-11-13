@@ -446,6 +446,13 @@ input[type="submit"]{
 .btn-ajout:hover{
 	background-color: #1D6154;
 }
+.error-message-add{
+	text-align:center ;
+    color: red;
+    font-family: 'work sans';
+    font-size: larger;
+    font-weight: 600;
+}
  /* ***********footer********** */
 footer nav ul {
 	display: flex;

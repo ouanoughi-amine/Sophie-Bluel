@@ -278,17 +278,20 @@ const galleryDiv        = document.querySelector(".gallery");
 buttonValiderModal.addEventListener("click",  (event) => {
 	// Empêcher le formulaire de se soumettre et de rafraîchir la page.
 	event.preventDefault();
-    // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
-	modalAdd.style.display="none";
-    // afficher la " modalDelete" aprés qu'on a cliquer sur button valider
-	modalDelete.style.display="block";
+   
   
 	// Vérifier si tous les champs du formulaire sont valides.
 	if (inputAddImage.checkValidity() === true && titleAdd.checkValidity() === true && titleCategory.checkValidity() === true) {
+		 // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
+	modalAdd.style.display="none";
+    // afficher la " modalDelete" aprés qu'on a cliquer sur button valider
+	modalDelete.style.display="block";
 	 postWork();
 	} else {
 	  // Afficher une erreur si tous les champs du formulaire ne sont pas valides.
-	  alert("Tous les champs sont requis");
+	//   alert("Tous les champs sont requis");
+	  const ErrorMessageAdd = document.querySelector(".error-message-add");
+	  ErrorMessageAdd.textContent = "Tous les champs sont requis";
 	}
   });
 
