@@ -19,7 +19,7 @@ document.addEventListener("submit", async function(event) {
     });
     if (!response.ok) {
       const data = await response.json();
-      const errorMessage = document.querySelector(".message-erreur");
+      const errorMessage = document.querySelector(".message-error");
       errorMessage.textContent = "Erreur d'utilisateur ou de mot de passe, veuillez réessayer";
     } else {
       const data = await response.json();

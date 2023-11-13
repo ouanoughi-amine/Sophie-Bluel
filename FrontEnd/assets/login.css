@@ -60,9 +60,9 @@ table {
   border-spacing: 0;
 }
 body {
-  font-family: 'Work Sans' ;
-  background-color:#FFFEF8;
-  font-size: 14px;
+   font-family: 'Work Sans' ;
+   background-color:#FFFEF8;
+   font-size: 14px;
    }
    .main-content{
     max-width: 1140px;
@@ -73,8 +73,6 @@ header {
     justify-content: space-between;
     margin: 50px 0
    }
-  
-   
    h1{
     display: flex;
     flex-direction: column;
@@ -83,7 +81,6 @@ header {
     font-weight: 800;
     color: #B1663C
    }
-   
    h1 > span {
     font-family: 'Work Sans';
     font-size:10px;
@@ -100,13 +97,11 @@ header {
     display: flex;
     align-items: center;
     list-style-type: none;
-   
    }
    nav li {
     padding: 0 10px;
     font-size: 1.2em;
    }
-   
    li:hover {
     color: #B1663C;
    }
@@ -122,7 +117,7 @@ header {
     font-family: "Work Sans";
     margin-top: 2rem;
    }
-    .login-input legend{
+   .login-input legend{
         color: #000;
     }
     .login-input input{
@@ -132,7 +127,7 @@ header {
     width: 379px;
     padding: 0.9rem 0;
    }
-   .message-erreur{
+   .message-error{
     text-align:center ;
     margin-top: 30px;
     color: red;
@@ -140,7 +135,7 @@ header {
     font-size: larger;
     font-weight: 600;
    }
-   .butt{
+   .button-connect{
     font-family: 'Syne';
     color: white;
     background-color: #1D6154;

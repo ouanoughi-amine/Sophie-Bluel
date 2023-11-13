@@ -81,58 +81,55 @@ function getWorks() {
 	};
   
   function displayCategoriesButtons(categories) {
-	const filterDiv = document.querySelector(".filters");
-	// console.log("categories : ",categories);
-  
-	const allButton = document.createElement("button");
-	allButton.innerHTML = "TOUS";
-	allButton.classList=("filter-button");
+	  const filterDiv = document.querySelector(".filters");
+      const allButton = document.createElement("button");
+	  allButton.innerHTML = "TOUS";
+	  allButton.classList=("filter-button");
+		
+	  allButton.addEventListener("click", getFilter);
+	  filterDiv.appendChild(allButton);
 	
-	allButton.addEventListener("click", getFilter);
-	filterDiv.appendChild(allButton);
-  
-	for (let i = 0; i < categories.length; i++) {
-	  const newButton = document.createElement("button");
-	  newButton.innerHTML = categories[i].name;
-	  newButton.id = categories[i].id;
-	  newButton.classList=("filter-button");
+	    for (let i = 0; i < categories.length; i++) {
+			const newButton = document.createElement("button");
+			newButton.innerHTML = categories[i].name;
+			newButton.id = categories[i].id;
+			newButton.classList=("filter-button");
 
-	  newButton.addEventListener("click", getFilter);
+			newButton.addEventListener("click", getFilter);
 	  
-	  filterDiv.appendChild(newButton);
-	}
-  }
+			filterDiv.appendChild(newButton);
+	 	}
+    }
   function getFilter() {
-	const filterClicked = event.target;
-	const filtreId = event.target.id;
-	let allButton = document.querySelectorAll(".filter-button")
-	allButton.forEach((element) => {
-		element.classList.remove("filter-button-active")
-	});
-
-	filterClicked.classList.add("filter-button-active");
+	  const filterClicked = event.target;
+	  const filtreId = event.target.id;
+	  const allButton = document.querySelectorAll(".filter-button");
+	  const galleryDiv = document.querySelector(".gallery");
+	  const figures = galleryDiv.querySelectorAll("figure");
 	
-	const galleryDiv = document.querySelector(".gallery");
-	const figures = galleryDiv.querySelectorAll("figure");
-  
-	figures.forEach((figure) => {
-	  // Vérifiez la valeur de l'attribut 
-	  const category = figure.getAttribute("category");
+		allButton.forEach((element) => {
+			element.classList.remove("filter-button-active")
+		});
+		filterClicked.classList.add("filter-button-active");
+	
+		figures.forEach((figure) => {
+	  		// Vérifiez la valeur de l'attribut 
+	  		const category = figure.getAttribute("category");
 
-	  figure.style.display = "none";
-	  if (filtreId === "") {
-		figure.style.display = "block";
-	  }
-	  if (category == filtreId) {
-		// Si la valeur n'est pas 'Objet', cachez l'élément
-		figure.style.display = "block";
-	  }
-	});
-  }
+	  		figure.style.display = "none";
+			if (filtreId === "") {
+			 figure.style.display = "block";
+	    	}
+			if (category == filtreId) {
+			 // Si la valeur n'est pas 'Objet', cachez l'élément
+			 figure.style.display = "block";
+	    	}
+		});
+  	}
   // Exécutez la fonction principale
     getCategories()
 	.then((resultat) => {
-	displayCategoriesButtons(resultat);
+		displayCategoriesButtons(resultat);
 	})
 	.catch((err) => {
 	  console.log("error while fetching the categories : ", err);

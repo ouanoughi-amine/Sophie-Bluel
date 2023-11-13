@@ -198,11 +198,11 @@ async function postWork(){
                      deleteWork(jsonData.id);
                     });
 
-                 // ajout de projet à la galerie
-                const galleryDiv = document.querySelector(".gallery");
+                     // ajout de projet à la galerie
+                    const galleryDiv = document.querySelector(".gallery");
                 
-                const galleryItem = buildGalleryItem(jsonData);
-                galleryDiv.appendChild(galleryItem);
+                    const galleryItem = buildGalleryItem(jsonData);
+                    galleryDiv.appendChild(galleryItem);
 	    } catch (error) {
 		console.error("Erreur lors de la lecture de l'ajout d'un  work:", error);
 	    }
