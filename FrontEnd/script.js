@@ -68,7 +68,7 @@ function getWorks() {
 		console.error("There was a problem:", error.message);
 	  });
   }
-  
+//  Récuperer les donneés du back-end
   async function getCategories() {
 	const response = await fetch("http://localhost:5678/api/categories");
 	 const categories = await response.json();
@@ -79,28 +79,29 @@ function getWorks() {
 	  return categories;
 	  }
 	};
-  
+//  Afficher les boutons des catégories passé en paramétre
   function displayCategoriesButtons(categories) {
 	  const filterDiv = document.querySelector(".filters");
       const allButton = document.createElement("button");
 	  allButton.innerHTML = "TOUS";
 	  allButton.classList=("filter-button");
-		
+		//  clique sur bouton "TOUS"
 	  allButton.addEventListener("click", getFilter);
 	  filterDiv.appendChild(allButton);
-	
+	    // bouclé sur tableau des catégories (tableau d'objet)
 	    for (let i = 0; i < categories.length; i++) {
 			const newButton = document.createElement("button");
 			newButton.innerHTML = categories[i].name;
 			newButton.id = categories[i].id;
 			newButton.classList=("filter-button");
-
+			
 			newButton.addEventListener("click", getFilter);
 	  
 			filterDiv.appendChild(newButton);
 	 	}
     }
-  function getFilter() {
+	// filtrer les projets
+  function getFilter(event) {
 	  const filterClicked = event.target;
 	  const filtreId = event.target.id;
 	  const allButton = document.querySelectorAll(".filter-button");

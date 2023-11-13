@@ -14,6 +14,7 @@ btnArrow.addEventListener("click", () => {
 	modalDelete.style.display = 'block';
 	modalAdd.style.display = 'none';
 });
+// Afficher la modale au "click" sur les élements ayant la classe "modal-trigger"
 modalTiggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
 function toggleModal(){
@@ -80,7 +81,7 @@ async function deleteWork(workId) {
 
 //  ********* ajouter des projets à la modale *************
 
-// 
+// Au clique sur inputAddIage on telecharge une image
 const buttonValiderModal = document.querySelector("#button-valider-modal");
 const inputAddImage      = document.querySelector("#input-add-image");
 
@@ -140,7 +141,7 @@ buttonValiderModal.addEventListener("click",  (event) => {
    
   
 	// Vérifier si tous les champs du formulaire sont valides.
-	if (inputAddImage.checkValidity() === true && titleAdd.checkValidity() === true && titleCategory.checkValidity() === true) {
+	if (inputAddImage.checkValidity() && titleAdd.checkValidity() && titleCategory.checkValidity()) {
 		 // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
 	    modalAdd.style.display="none";
         // afficher la " modalDelete" aprés qu'on a cliquer sur button valider

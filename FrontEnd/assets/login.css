@@ -108,6 +108,7 @@ header {
    #log-in{
     font-weight: bold;
    }
+   /* formulaire de connexion */
    .form-list{
     display: flex;
     flex-direction: column;
