@@ -26,13 +26,12 @@ logoutLink.addEventListener('click', (event)=>{
 	sessionStorage.removeItem('userToken');
 });
 // Fonction pour récupérer les données depuis l'API
-function getWorks() {
-	return fetch("http://localhost:5678/api/works").then((response) => {
-	  if (!response.ok) {
+async function getWorks() {
+	const response = await fetch("http://localhost:5678/api/works");
+	if (!response.ok) {
 		throw new Error("Network response was not ok");
-	  }
-	  return response.json();
-	});
+	}
+	return await response.json();
   }
   
   // Fonction pour construire les éléments HTML
@@ -53,21 +52,21 @@ function getWorks() {
 	return figure;
   }
   // Fonction pour afficher les éléments dans la galerie
-  function displayWorks(works) {
-	const galleryDiv = document.querySelector(".gallery");
-	works.forEach((work) => {
-	  const galleryItem = buildGalleryItem(work);
-	  galleryDiv.appendChild(galleryItem);
+  	function displayWorks(works) {
+		const galleryDiv = document.querySelector(".gallery");
+		works.forEach((work) => {
+	    const galleryItem = buildGalleryItem(work);
+	    galleryDiv.appendChild(galleryItem);
 	});
-  }
+  	}
   // Fonction principale pour récupérer et afficher les éléments
-  function main() {
-	getWorks()
-	  .then(displayWorks)
-	  .catch((error) => {
-		console.error("There was a problem:", error.message);
-	  });
-  }
+	function main() {
+	  getWorks()
+		.then(displayWorks)
+	    .catch((error) => {
+	   		console.error("There was a problem:", error.message);
+	    });
+    }
 //  Récuperer les donneés du back-end
   async function getCategories() {
 	const response = await fetch("http://localhost:5678/api/categories");
@@ -76,8 +75,8 @@ function getWorks() {
 	if (!response.ok) {
 		throw new Error("Network response was not ok");
 	  }else{
-	  return categories;
-	  }
+	  	return categories;
+		}
 	};
 //  Afficher les boutons des catégories passé en paramétre
   function displayCategoriesButtons(categories) {
@@ -94,9 +93,8 @@ function getWorks() {
 			newButton.innerHTML = categories[i].name;
 			newButton.id = categories[i].id;
 			newButton.classList=("filter-button");
-			
+			// au click sur buouton newButton
 			newButton.addEventListener("click", getFilter);
-	  
 			filterDiv.appendChild(newButton);
 	 	}
     }
@@ -122,7 +120,6 @@ function getWorks() {
 			 figure.style.display = "block";
 	    	}
 			if (category == filtreId) {
-			 // Si la valeur n'est pas 'Objet', cachez l'élément
 			 figure.style.display = "block";
 	    	}
 		});

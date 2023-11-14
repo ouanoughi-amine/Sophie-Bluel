@@ -28,6 +28,7 @@ document.addEventListener("submit", async function(event) {
       window.location.href = 'index.html';
     }
   }
+  // si ya eu erreur on l'a rattrape avec un "catch"
    catch (error) {
     alert(`Erreur lors de l'appel API: ${error}`);
   }
