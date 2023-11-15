@@ -29,7 +29,7 @@ function getWorkImg(works) {
     })
     .then(response => response.json())
     .then(works => {
-       works.forEach(work => {
+    works.forEach(work => {
 		const galleryModal = document.querySelector(".projets");
 		const galleryElementModal = document.createElement("figure");
 		const imageElementModal   = document.createElement("img");
@@ -72,8 +72,8 @@ async function deleteWork(workId) {
 	// Si réponse de suppression de l'API est OK, alors on supprime le projet du DOM (Gallerie et Modale).
 	if (deleteResponse.ok) {
 		const workToRemove = document.querySelectorAll(`figure[data-id="${workId}"]`);
-        for(let i = 0; i < workToRemove.length; i++){
-		workToRemove[i].remove();
+    for(let i = 0; i < workToRemove.length; i++){
+		  workToRemove[i].remove();
 		};
 	} else {
 		return alert("Échec de la suppresion du projet");
@@ -89,7 +89,7 @@ const inputAddImage      = document.querySelector("#input-add-image");
 inputAddImage.addEventListener("input", () => {
 	// Vérification de la taille de l'image ajouter à la "MODALE".
 	if(inputAddImage.files[0].size <= Math.pow(1024, 2) * 4){
-    	// réinitialisation de la zone "content-add-image"
+    // réinitialisation de la zone "content-add-image"
 		const contentAddImage = document.querySelector(".content-add-image");
 		contentAddImage.innerHTML="";
 		// Crée l'image à afficher 
@@ -140,9 +140,9 @@ buttonValiderModal.addEventListener("click",  (event) => {
 	event.preventDefault();
 	// Vérifier si tous les champs du formulaire sont valides.
 	if (inputAddImage.checkValidity() && titleAdd.checkValidity() && titleCategory.checkValidity()) {
-		 // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
+	    // masquer la "modalAdd" aprés qu'on a cliquer sur button valider
 	    modalAdd.style.display="none";
-        // afficher la " modalDelete" aprés qu'on a cliquer sur button valider
+      // afficher la " modalDelete" aprés qu'on a cliquer sur button valider
 	    modalDelete.style.display="block";
 	    postWork();
 	} else {
@@ -173,32 +173,32 @@ async function postWork(){
     //  si la réponse est ok on ajoute le projet à la galerie et la modale
     if(addresponse.ok){
 	    try {
-            const jsonData = await addresponse.json(); 
-            //  ajout de projet à la modale
-            const galleryModal = document.querySelector(".projets");
-            const galleryElementModal = document.createElement("figure");
-            galleryElementModal.dataset.id = jsonData.id;
+        const jsonData = await addresponse.json(); 
+        //  ajout de projet à la modale
+        const galleryModal = document.querySelector(".projets");
+        const galleryElementModal = document.createElement("figure");
+        galleryElementModal.dataset.id = jsonData.id;
                 
-            const imageElementModal = document.createElement("img");
-            imageElementModal.src = jsonData.imageUrl; 
-            imageElementModal.crossOrigin = "";
+        const imageElementModal = document.createElement("img");
+        imageElementModal.src = jsonData.imageUrl; 
+        imageElementModal.crossOrigin = "";
                     
-            const buttonTrashModal = document.createElement("button");
-            buttonTrashModal.className = "trash-button-modal";
-            const iconeTrashModal = document.createElement("i");
-            iconeTrashModal.className = "fa-solid fa-trash-can";
-            buttonTrashModal.appendChild(iconeTrashModal);
-            galleryElementModal.appendChild(buttonTrashModal);
-            galleryElementModal.appendChild(imageElementModal);
-            galleryModal.appendChild(galleryElementModal);
+        const buttonTrashModal = document.createElement("button");
+        buttonTrashModal.className = "trash-button-modal";
+        const iconeTrashModal = document.createElement("i");
+        iconeTrashModal.className = "fa-solid fa-trash-can";
+        buttonTrashModal.appendChild(iconeTrashModal);
+        galleryElementModal.appendChild(buttonTrashModal);
+        galleryElementModal.appendChild(imageElementModal);
+        galleryModal.appendChild(galleryElementModal);
                     
-                buttonTrashModal.addEventListener("click", function(){
-                 deleteWork(jsonData.id);
-                });
-                 // ajout de projet à la galerie
-                const galleryDiv = document.querySelector(".gallery");
-                const galleryItem = buildGalleryItem(jsonData);
-                galleryDiv.appendChild(galleryItem);
+        buttonTrashModal.addEventListener("click", function(){
+          deleteWork(jsonData.id);
+        });
+        // ajout de projet à la galerie
+        const galleryDiv = document.querySelector(".gallery");
+        const galleryItem = buildGalleryItem(jsonData);
+        galleryDiv.appendChild(galleryItem);
 	    } catch (error) {
 		console.error("Erreur lors de la lecture de l'ajout d'un  work:", error);
 	    }
